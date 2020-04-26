@@ -3,7 +3,7 @@ package enums;
 public enum HandRankCategoryEnum {
 
   FOLDED(-1, ""),
-  HIGH_CARD(0, "High Card"),
+  HIGH_CARD(0, "High Card", 1, 6),
   ONE_PAIR(1, "One Pair", 0, 2),
   TWO_PAIR(2, "Two Pair", 0, 0),
   THREE_OF_A_KIND(3, "Three Of A Kind",0, 1),

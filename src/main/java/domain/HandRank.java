@@ -67,18 +67,15 @@ public class HandRank implements Comparable<HandRank>{
   }
 
   private Comparator<HandRank> kickersComparator() {
-    return new Comparator<HandRank>() {
-      @Override
-      public int compare(HandRank o1, HandRank o2) {
-         int result = 0;
-         for(int i=0; i<o1.getKickers().size(); i++){
-             result =  o1.getKickers().get(i).compareTo(o2.getKickers().get(i));
-             if(result != 0){
-               return result;
-             }
-         }
-         return result;
-      }
+    return (o1, o2) -> {
+       int result = 0;
+       for(int i=0; i<o1.getKickers().size(); i++){
+           result =  o1.getKickers().get(i).compareTo(o2.getKickers().get(i));
+           if(result != 0){
+             return result;
+           }
+       }
+       return result;
     };
   }
 }

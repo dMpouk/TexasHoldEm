@@ -1,3 +1,5 @@
+package service;
+
 import domain.HandRank;
 import domain.Player;
 import enums.HandRankCategoryEnum;
@@ -20,12 +22,8 @@ public class HandRankService {
     handRank = (handRank == null) ? hasTheeOfAKind(selectedPlayer) : handRank;
     handRank = (handRank == null) ? hasTwoPair(selectedPlayer) : handRank;
     handRank = (handRank == null) ? hasOnePair(selectedPlayer) : handRank;
-    if (handRank == null) {
-      handRank = new HandRank();
-      handRank.setHandRankCategory(HandRankCategoryEnum.HIGH_CARD);
-      handRank.setAt(selectedPlayer.getAllCardsSorted().get(0));
-      handRank.setKickers(selectedPlayer.getAllCardsSorted().subList(1, 6));
-    }
+    handRank = (handRank == null) ? hasHighCard(selectedPlayer) : handRank;
+
     return handRank;
   }
 
@@ -67,6 +65,10 @@ public class HandRankService {
 
   private HandRank hasOnePair(Player selectedPlayer, Character... excludedFace) {
     return ruleEngine.hasOnePair(selectedPlayer, excludedFace);
+  }
+
+  private HandRank hasHighCard(Player selectedPlayer) {
+    return ruleEngine.hasHighCard(selectedPlayer);
   }
 
 }
