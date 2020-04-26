@@ -59,7 +59,7 @@ public class PokerHandService {
     StringBuilder result = new StringBuilder();
     for (Player currentPlayer : players) {
       result
-          .append(currentPlayer.getAllCardsPrinted())
+          .append(getAllCardsPrinted(currentPlayer))
           .append(ONE_SPACE)
           .append(currentPlayer.getHandRank().getHandRankCategory().getDescription())
           .append((currentPlayer.equals(winner) ? ONE_SPACE + WINNER : ""))
@@ -81,6 +81,22 @@ public class PokerHandService {
       }
       counter++;
     }
+  }
+
+  private String getAllCardsPrinted(Player player) {
+    List<Card> allPlayerCards = new ArrayList<>(player.getHoleCards());
+    allPlayerCards.addAll(player.getCommunityCards());
+
+    StringBuilder result = new StringBuilder();
+    int index = 1;
+    for (Card card : allPlayerCards) {
+      result.append(card.getFace()).append(card.getSuit());
+      if (index != allPlayerCards.size()) {
+        result.append(ONE_SPACE);
+      }
+      index++;
+    }
+    return result.toString();
   }
 
 }

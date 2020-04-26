@@ -58,7 +58,7 @@ public class HandRankService {
   }
 
   private HandRank hasTheeOfAKind(Player selectedPlayer) {
-    return ruleEngine.hasTheeOfAKind(selectedPlayer);
+    return ruleEngine.hasThreeOfAKind(selectedPlayer);
   }
 
   private HandRank hasTwoPair(Player selectedPlayer) {

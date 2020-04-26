@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class Player implements Comparable<Player> {
 
-  // TODO : Reconsider combining the two lists
   private List<Card> holeCards;
   private List<Card> communityCards;
   private HandRank handRank;
@@ -47,22 +46,6 @@ public class Player implements Comparable<Player> {
 
     Comparator<Card> cardComparator = Comparator.reverseOrder();
     return allPlayerCards.stream().sorted(cardComparator).collect(Collectors.toList());
-  }
-
-  public String getAllCardsPrinted() {
-    List<Card> allPlayerCards = new ArrayList<>(this.getHoleCards());
-    allPlayerCards.addAll(this.getCommunityCards());
-
-    StringBuilder result = new StringBuilder();
-    int index = 1;
-    for (Card card : allPlayerCards) {
-      result.append(card.getFace()).append(card.getSuit());
-      if (index != allPlayerCards.size()) {
-        result.append(" ");
-      }
-      index++;
-    }
-    return result.toString();
   }
 
   @Override

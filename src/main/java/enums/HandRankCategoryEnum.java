@@ -4,9 +4,9 @@ public enum HandRankCategoryEnum {
 
   FOLDED(-1, ""),
   HIGH_CARD(0, "High Card"),
-  ONE_PAIR(1, "One Pair"),
-  TWO_PAIR(2, "Two Pair"),
-  THREE_OF_A_KIND(3, "Three Of A Kind"),
+  ONE_PAIR(1, "One Pair", 0, 2),
+  TWO_PAIR(2, "Two Pair", 0, 0),
+  THREE_OF_A_KIND(3, "Three Of A Kind",0, 1),
   STRAIGHT(4, "Straight"),
   FLUSH(5, "Flush"),
   FULL_HOUSE(6, "Full House"),
@@ -20,8 +20,17 @@ public enum HandRankCategoryEnum {
     this.description = description;
   }
 
+  HandRankCategoryEnum(int rankCode, String description, int minKickerIndex, int maxKickerIndex) {
+    this.rankCode = rankCode;
+    this.description = description;
+    this.minKickerIndex = minKickerIndex;
+    this.maxKickerIndex = maxKickerIndex;
+  }
+
   int rankCode;
   String description;
+  int minKickerIndex;
+  int maxKickerIndex;
 
   public int getRankCode() {
     return rankCode;
@@ -29,5 +38,13 @@ public enum HandRankCategoryEnum {
 
   public String getDescription() {
     return description;
+  }
+
+  public int getMinKickerIndex() {
+    return minKickerIndex;
+  }
+
+  public int getMaxKickerIndex() {
+    return maxKickerIndex;
   }
 }
