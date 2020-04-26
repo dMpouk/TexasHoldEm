@@ -7,10 +7,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public class PokerHandService {
@@ -55,7 +53,9 @@ public class PokerHandService {
 
   private Player decideWinner(List<Player> players) {
     Comparator<Player> playerComparator = Comparator.reverseOrder();
-    List<Player> sorted = players.stream().sorted(playerComparator).collect(Collectors.toList());
+    List<Player> filtered = players.stream().filter(p -> !p.getHandRank().getHandRankCategory().equals(HandRankCategoryEnum.FOLDED)).collect(
+        Collectors.toList());
+    List<Player> sorted = filtered.stream().sorted(playerComparator).collect(Collectors.toList());
     return sorted.get(0);
   }
 

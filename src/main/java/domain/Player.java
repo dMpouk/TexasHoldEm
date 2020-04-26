@@ -67,28 +67,6 @@ public class Player implements Comparable<Player> {
 
   @Override
   public int compareTo(Player other) {
-//    int result = 0;
-//    if (this.getHandRank().getHandRankCategory().getRankCode()
-//        > other.getHandRank().getHandRankCategory().getRankCode()) {
-//      return 1;
-//    } else if (this.getHandRank().getHandRankCategory().getRankCode()
-//        == other.getHandRank().getHandRankCategory().getRankCode()) {
-//
-//      if (this.getHandRank().getAt().getFaceNumericRepresentation()
-//          > other.getHandRank().getAt().getFaceNumericRepresentation()) {
-//        return 1;
-//      } else if (this.getHandRank().getAt().getFaceNumericRepresentation()
-//          < other.getHandRank().getAt().getFaceNumericRepresentation()) {
-//        return -1;
-//      } else{
-//
-//
-//        }
-//
-//
-//      }
-//    }
-//    return -1;
     return Comparator.comparing(Player::getHandRank).compare(this, other);
   }
 }

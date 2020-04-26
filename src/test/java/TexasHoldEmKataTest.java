@@ -160,26 +160,25 @@ public class TexasHoldEmKataTest {
     assertEquals(expected, pokerHandService.calculateHandRank(cards));
   }
 
-//  @Test
-//  public void calculateHandRankForSixPlayersAndDecideWinnerWhileSomePlayersFolded(){
-//    String cards = new StringBuilder()
-//        .append("Kc 9s Ks Kd 9d 3c 6d").append(System.lineSeparator())
-//        .append("9c Ah Ks Kd 9d 3c 6d").append(System.lineSeparator())
-//        .append("Ac Qc Ks Kd 9d 3c").append(System.lineSeparator())
-//        .append("9h 5s").append(System.lineSeparator())
-//        .append("4d 2d Ks Kd 9d 3c 6d").append(System.lineSeparator())
-//        .append("7s Ts Ks Kd 9d").append(System.lineSeparator())
-//        .toString();
-//    String expected = new StringBuilder()
-//        .append("Kc 9s Ks Kd 9d 3c 6d").append(ONE_SPACE).append(HandRankCategoryEnum.FULL_HOUSE.getDescription()).append(System.lineSeparator())
-//        .append("9c Ah Ks Kd 9d 3c 6d").append(ONE_SPACE).append(HandRankCategoryEnum.TWO_PAIR.getDescription()).append(System.lineSeparator())
-//        .append("Ac Qc Ks Kd 9d 3c").append(System.lineSeparator())
-//        .append("9h 5s").append(System.lineSeparator())
-//        .append("4d 2d Ks Kd 9d 3c 6d").append(ONE_SPACE).append(HandRankCategoryEnum.FLUSH.getDescription()).append(System.lineSeparator())
-//        .append("7s Ts Ks Kd 9d").append(System.lineSeparator())
-//        .toString();
-//    assertEquals(expected, pokerHandService.calculateHandRank(cards));
-//  }
-
+  @Test
+  public void calculateHandRankForSixPlayersAndDecideWinnerWhileSomePlayersFolded(){
+    String cards = new StringBuilder()
+        .append("Kc 9s Ks Kd 9d 3c 6d").append(System.lineSeparator())
+        .append("9c Ah Ks Kd 9d 3c 6d").append(System.lineSeparator())
+        .append("Ac Qc Ks Kd 9d 3c").append(System.lineSeparator())
+        .append("9h 5s").append(System.lineSeparator())
+        .append("4d 2d Ks Kd 9d 3c 6d").append(System.lineSeparator())
+        .append("7s Ts Ks Kd 9d").append(System.lineSeparator())
+        .toString();
+    String expected = new StringBuilder()
+        .append("Kc 9s Ks Kd 9d 3c 6d").append(ONE_SPACE).append(HandRankCategoryEnum.FULL_HOUSE.getDescription()).append(ONE_SPACE).append(WINNER).append(System.lineSeparator())
+        .append("9c Ah Ks Kd 9d 3c 6d").append(ONE_SPACE).append(HandRankCategoryEnum.TWO_PAIR.getDescription()).append(System.lineSeparator())
+        .append("Ac Qc Ks Kd 9d 3c").append(ONE_SPACE).append(System.lineSeparator())
+        .append("9h 5s").append(ONE_SPACE).append(System.lineSeparator())
+        .append("4d 2d Ks Kd 9d 3c 6d").append(ONE_SPACE).append(HandRankCategoryEnum.FLUSH.getDescription()).append(System.lineSeparator())
+        .append("7s Ts Ks Kd 9d")
+        .toString();
+    assertEquals(expected, pokerHandService.calculateHandRank(cards));
+  }
 
 }
