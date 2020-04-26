@@ -22,7 +22,7 @@ public class TexasHoldEmKataTest {
           .append("Kc 9s Ts 5d 7d 3c 6d").append(System.lineSeparator())
           .toString();
 
-      assertEquals("Kc 9s Ts 5d 7d 3c 6d" + ONE_SPACE + HandRankCategoryEnum.HIGH_CARD.getDescription() + ONE_SPACE + WINNER , pokerHandService.calculateHandRank(allCards));
+      assertEquals("Kc 9s Ts 5d 7d 3c 6d" + ONE_SPACE + HandRankCategoryEnum.HIGH_CARD.getDescription() + ONE_SPACE + WINNER , pokerHandService.analyze(allCards));
   }
 
   @Test
@@ -31,7 +31,7 @@ public class TexasHoldEmKataTest {
         .append("Kc 9s 5s Td 9d 3c 6d").append(System.lineSeparator())
         .toString();
 
-    assertEquals("Kc 9s 5s Td 9d 3c 6d" + ONE_SPACE + HandRankCategoryEnum.ONE_PAIR.getDescription() + ONE_SPACE + WINNER, pokerHandService.calculateHandRank(cards));
+    assertEquals("Kc 9s 5s Td 9d 3c 6d" + ONE_SPACE + HandRankCategoryEnum.ONE_PAIR.getDescription() + ONE_SPACE + WINNER, pokerHandService.analyze(cards));
   }
 
   @Test
@@ -40,7 +40,7 @@ public class TexasHoldEmKataTest {
         .append("Kc 9s Ks Td 9d 3c 6d").append(System.lineSeparator())
         .toString();
 
-    assertEquals("Kc 9s Ks Td 9d 3c 6d" + ONE_SPACE + HandRankCategoryEnum.TWO_PAIR.getDescription() + ONE_SPACE + WINNER , pokerHandService.calculateHandRank(cards));
+    assertEquals("Kc 9s Ks Td 9d 3c 6d" + ONE_SPACE + HandRankCategoryEnum.TWO_PAIR.getDescription() + ONE_SPACE + WINNER , pokerHandService.analyze(cards));
   }
 
   @Test
@@ -49,7 +49,7 @@ public class TexasHoldEmKataTest {
         .append("Kc 9s Ks Kd Td 3c 6d").append(System.lineSeparator())
         .toString();
 
-    assertEquals("Kc 9s Ks Kd Td 3c 6d" + ONE_SPACE + HandRankCategoryEnum.THREE_OF_A_KIND.getDescription() + ONE_SPACE + WINNER , pokerHandService.calculateHandRank(cards));
+    assertEquals("Kc 9s Ks Kd Td 3c 6d" + ONE_SPACE + HandRankCategoryEnum.THREE_OF_A_KIND.getDescription() + ONE_SPACE + WINNER , pokerHandService.analyze(cards));
   }
 
   @Test
@@ -63,7 +63,7 @@ public class TexasHoldEmKataTest {
         .append("Kc 9s Ks Kd Td 3c 6d").append(ONE_SPACE).append(HandRankCategoryEnum.THREE_OF_A_KIND.getDescription()).append(ONE_SPACE).append(WINNER).append(System.lineSeparator())
         .append("9c Ah Ks Kd 9d 3c 6d").append(ONE_SPACE).append(HandRankCategoryEnum.TWO_PAIR.getDescription())
         .toString();
-    assertEquals(expected , pokerHandService.calculateHandRank(cards));
+    assertEquals(expected , pokerHandService.analyze(cards));
   }
 
   @Test
@@ -78,7 +78,7 @@ public class TexasHoldEmKataTest {
         .append("9c Ah Ts Jd 8d 3c 6d").append(ONE_SPACE).append(HandRankCategoryEnum.HIGH_CARD.getDescription()).append(ONE_SPACE).append(WINNER)
         .toString();
 
-    assertEquals(expected, pokerHandService.calculateHandRank(cards));
+    assertEquals(expected, pokerHandService.analyze(cards));
   }
 
   @Test
@@ -91,7 +91,7 @@ public class TexasHoldEmKataTest {
         .append("Kc 9s Ts Jd 8d 3c 6d").append(ONE_SPACE).append(HandRankCategoryEnum.HIGH_CARD.getDescription()).append(ONE_SPACE).append(WINNER).append(System.lineSeparator())
         .append("9c Ah Ts Jd 8d 3c")
         .toString();
-    assertEquals(expected, pokerHandService.calculateHandRank(cards));
+    assertEquals(expected, pokerHandService.analyze(cards));
   }
 
   @Test
@@ -102,7 +102,7 @@ public class TexasHoldEmKataTest {
     String expected = new StringBuilder()
         .append("5c 6s 9s Td 8d 3c 7d").append(ONE_SPACE).append(HandRankCategoryEnum.STRAIGHT.getDescription()).append(ONE_SPACE).append(WINNER)
         .toString();
-    assertEquals(expected, pokerHandService.calculateHandRank(cards));
+    assertEquals(expected, pokerHandService.analyze(cards));
   }
 
   @Test
@@ -113,7 +113,7 @@ public class TexasHoldEmKataTest {
     String expected = new StringBuilder()
         .append("5s 6s 9s Td 8d 3s 7s").append(ONE_SPACE).append(HandRankCategoryEnum.FLUSH.getDescription()).append(ONE_SPACE).append(WINNER)
         .toString();
-    assertEquals(expected, pokerHandService.calculateHandRank(cards));
+    assertEquals(expected, pokerHandService.analyze(cards));
   }
 
   @Test
@@ -124,7 +124,7 @@ public class TexasHoldEmKataTest {
     String expected = new StringBuilder()
         .append("Ks 9d 9s Kc 8d 3c Ks").append(ONE_SPACE).append(HandRankCategoryEnum.FULL_HOUSE.getDescription()).append(ONE_SPACE).append(WINNER)
         .toString();
-    assertEquals(expected, pokerHandService.calculateHandRank(cards));
+    assertEquals(expected, pokerHandService.analyze(cards));
   }
 
   @Test
@@ -135,7 +135,7 @@ public class TexasHoldEmKataTest {
     String expected = new StringBuilder()
         .append("Ks 9d 9s 9c 8d 9c Ts").append(ONE_SPACE).append(HandRankCategoryEnum.FOUR_OF_A_KIND.getDescription()).append(ONE_SPACE).append(WINNER)
         .toString();
-    assertEquals(expected, pokerHandService.calculateHandRank(cards));
+    assertEquals(expected, pokerHandService.analyze(cards));
   }
 
   @Test
@@ -146,7 +146,7 @@ public class TexasHoldEmKataTest {
     String expected = new StringBuilder()
         .append("Ts 9s Js 3c 8s 2c 7s").append(ONE_SPACE).append(HandRankCategoryEnum.STRAIGHT_FLUSH.getDescription()).append(ONE_SPACE).append(WINNER)
         .toString();
-    assertEquals(expected, pokerHandService.calculateHandRank(cards));
+    assertEquals(expected, pokerHandService.analyze(cards));
   }
 
   @Test
@@ -157,7 +157,7 @@ public class TexasHoldEmKataTest {
     String expected = new StringBuilder()
         .append("Ts Js Ks As 2c Qs 7d").append(ONE_SPACE).append(HandRankCategoryEnum.ROYAL_FLUSH.getDescription()).append(ONE_SPACE).append(WINNER)
         .toString();
-    assertEquals(expected, pokerHandService.calculateHandRank(cards));
+    assertEquals(expected, pokerHandService.analyze(cards));
   }
 
   @Test
@@ -178,7 +178,7 @@ public class TexasHoldEmKataTest {
         .append("4d 2d Ks Kd 9d 3c 6d").append(ONE_SPACE).append(HandRankCategoryEnum.FLUSH.getDescription()).append(System.lineSeparator())
         .append("7s Ts Ks Kd 9d")
         .toString();
-    assertEquals(expected, pokerHandService.calculateHandRank(cards));
+    assertEquals(expected, pokerHandService.analyze(cards));
   }
 
   @Test
@@ -189,7 +189,7 @@ public class TexasHoldEmKataTest {
     String expected = new StringBuilder()
         .append("Ad 9s 5d 3c 2s 4c Td").append(ONE_SPACE).append(HandRankCategoryEnum.STRAIGHT.getDescription()).append(ONE_SPACE).append(WINNER)
         .toString();
-    assertEquals(expected, pokerHandService.calculateHandRank(cards));
+    assertEquals(expected, pokerHandService.analyze(cards));
   }
 
   @Test
@@ -200,7 +200,7 @@ public class TexasHoldEmKataTest {
     String expected = new StringBuilder()
         .append("As 9s 5s 3s 2s 4s Td").append(ONE_SPACE).append(HandRankCategoryEnum.STRAIGHT_FLUSH.getDescription()).append(ONE_SPACE).append(WINNER)
         .toString();
-    assertEquals(expected, pokerHandService.calculateHandRank(cards));
+    assertEquals(expected, pokerHandService.analyze(cards));
   }
 
 }
