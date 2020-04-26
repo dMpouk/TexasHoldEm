@@ -1,13 +1,12 @@
 package service;
 
+import api.RuleEngineApi;
 import domain.HandRank;
 import domain.Player;
-import enums.HandRankCategoryEnum;
 
 public class HandRankService {
 
-  //TODO : make it interface
-  private RuleEngine ruleEngine = new RuleEngine();
+  private RuleEngineApi ruleEngine = new RuleEngine();
 
   public HandRank decideHandRank(Player selectedPlayer) {
     HandRank handRank;

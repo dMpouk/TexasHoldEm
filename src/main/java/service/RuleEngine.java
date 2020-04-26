@@ -1,5 +1,6 @@
 package service;
 
+import api.RuleEngineApi;
 import domain.Card;
 import domain.HandRank;
 import domain.Player;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RuleEngine {
+public class RuleEngine implements RuleEngineApi {
 
   private static final char ACE = 'A';
   private static final char MAX_CARDS = 7;
