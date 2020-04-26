@@ -53,8 +53,10 @@ public class PokerHandService {
 
   private Player decideWinner(List<Player> players) {
     Comparator<Player> playerComparator = Comparator.reverseOrder();
-    List<Player> filtered = players.stream().filter(p -> !p.getHandRank().getHandRankCategory().equals(HandRankCategoryEnum.FOLDED)).collect(
-        Collectors.toList());
+    List<Player> filtered =
+        players.stream()
+            .filter(p -> !p.getHandRank().getHandRankCategory().equals(HandRankCategoryEnum.FOLDED))
+            .collect(Collectors.toList());
     List<Player> sorted = filtered.stream().sorted(playerComparator).collect(Collectors.toList());
     return sorted.get(0);
   }
@@ -100,7 +102,7 @@ public class PokerHandService {
 
   private HandRank hasRoyalFlush(Player selectedPlayer) {
     HandRank straightFlushHandRank = hasStraightFlush(selectedPlayer);
-    if(straightFlushHandRank != null && straightFlushHandRank.getAt().getFace() == ACE){
+    if (straightFlushHandRank != null && straightFlushHandRank.getAt().getFace() == ACE) {
       HandRank handRank = straightFlushHandRank;
       handRank.setHandRankCategory(HandRankCategoryEnum.ROYAL_FLUSH);
       return handRank;
@@ -117,15 +119,21 @@ public class PokerHandService {
       Card selectedCard = sortedCards.get(i);
       Card currentCard = selectedCard;
       for (int j = i + 1; j < sortedCards.size(); j++) {
-        if ( ((sortedCards.get(j).getFaceNumericRepresentation() + 1)
-            == currentCard.getFaceNumericRepresentation())
-            && ((sortedCards.get(j).getSuit())
-            == currentCard.getSuit()) ) {
+        if ((((sortedCards.get(j).getFaceNumericRepresentation() + 1)
+                    == currentCard.getFaceNumericRepresentation())
+                || (sortedCards.get(j).getFaceNumericRepresentation() == 2
+                    && sortedCards.stream().anyMatch(c -> c.getFace() == ACE)))
+            && ((sortedCards.get(j).getSuit()) == currentCard.getSuit())) {
           sequence++;
           currentCard = sortedCards.get(j);
         } else {
           break;
         }
+      }
+      char currentSuit = currentCard.getSuit();
+      if(sortedCards.get(sortedCards.size()-1).getFaceNumericRepresentation() == 2
+          && sortedCards.stream().anyMatch(c -> c.getFace() == ACE && c.getSuit() == currentSuit)){
+        sequence++;
       }
       if (sequence > 4) {
         handRank.setHandRankCategory(HandRankCategoryEnum.STRAIGHT_FLUSH);
@@ -172,7 +180,7 @@ public class PokerHandService {
     StringBuilder suitString = new StringBuilder();
     selectedPlayer.getAllCardsSorted().forEach(card -> suitString.append(card.getSuit()));
 
-    Map<Character,Long> suitCounters = new HashMap<>();
+    Map<Character, Long> suitCounters = new HashMap<>();
     List<Long> counters = new ArrayList<>();
     long count = suitString.chars().filter(c -> c == HEART_SUIT).count();
     counters.add(count);
@@ -189,14 +197,18 @@ public class PokerHandService {
 
     counters.sort(Collections.reverseOrder());
     long highestCounter = counters.get(0);
-    if(highestCounter > 4){
-      char mostFrequentSuit = suitCounters.entrySet()
-          .stream()
-          .filter( entry -> entry.getValue() == highestCounter)
-          .findFirst()
-          .get()
-          .getKey();
-      Card highestCard = selectedPlayer.getAllCardsSorted().stream().filter(card -> card.getSuit() == mostFrequentSuit).findFirst().get();
+    if (highestCounter > 4) {
+      char mostFrequentSuit =
+          suitCounters.entrySet().stream()
+              .filter(entry -> entry.getValue() == highestCounter)
+              .findFirst()
+              .get()
+              .getKey();
+      Card highestCard =
+          selectedPlayer.getAllCardsSorted().stream()
+              .filter(card -> card.getSuit() == mostFrequentSuit)
+              .findFirst()
+              .get();
       HandRank handRank = new HandRank();
       handRank.setHandRankCategory(HandRankCategoryEnum.FLUSH);
       handRank.setAt(highestCard);
@@ -224,13 +236,18 @@ public class PokerHandService {
       Card selectedCard = sortedCards.get(i);
       Card currentCard = selectedCard;
       for (int j = i + 1; j < sortedCards.size(); j++) {
-        if ((sortedCards.get(j).getFaceNumericRepresentation() + 1)
-            == currentCard.getFaceNumericRepresentation()) {
+        if (((sortedCards.get(j).getFaceNumericRepresentation() + 1)
+                == currentCard.getFaceNumericRepresentation())
+            ) {
           sequence++;
           currentCard = sortedCards.get(j);
         } else {
           break;
         }
+      }
+      if(sortedCards.get(sortedCards.size()-1).getFaceNumericRepresentation() == 2
+          && sortedCards.stream().anyMatch(c -> c.getFace() == ACE)){
+        sequence++;
       }
       if (sequence > 4) {
         handRank.setHandRankCategory(HandRankCategoryEnum.STRAIGHT);
@@ -249,9 +266,12 @@ public class PokerHandService {
     List<Card> sortedCards = selectedPlayer.getAllCardsSorted();
     List<Card> filteredCards = new ArrayList<>(sortedCards);
 
-    if(excludedFace.length > 0){
+    if (excludedFace.length > 0) {
       List<Character> excludedCardsList = Arrays.asList(excludedFace);
-      filteredCards = sortedCards.stream().filter(card -> !excludedCardsList.contains(card.getFace())).collect(Collectors.toList());
+      filteredCards =
+          sortedCards.stream()
+              .filter(card -> !excludedCardsList.contains(card.getFace()))
+              .collect(Collectors.toList());
     }
 
     for (int i = 0; i < filteredCards.size(); i++) {
@@ -334,9 +354,12 @@ public class PokerHandService {
 
   private HandRank hasFullHouse(Player selectedPlayer) {
     HandRank threeOfAKindHandRank = hasTheeOfAKind(selectedPlayer);
-    HandRank onePairHandRank = (threeOfAKindHandRank != null) ? hasOnePair(selectedPlayer, threeOfAKindHandRank.getAt().getFace()) : null;
+    HandRank onePairHandRank =
+        (threeOfAKindHandRank != null)
+            ? hasOnePair(selectedPlayer, threeOfAKindHandRank.getAt().getFace())
+            : null;
 
-    if(threeOfAKindHandRank != null && onePairHandRank != null){
+    if (threeOfAKindHandRank != null && onePairHandRank != null) {
       HandRank handRank = new HandRank();
       handRank.setHandRankCategory(HandRankCategoryEnum.FULL_HOUSE);
       handRank.setAt(threeOfAKindHandRank.getAt());

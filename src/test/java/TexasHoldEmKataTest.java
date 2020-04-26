@@ -181,4 +181,26 @@ public class TexasHoldEmKataTest {
     assertEquals(expected, pokerHandService.calculateHandRank(cards));
   }
 
+  @Test
+  public void testStraightWithAceAsOne(){
+    String cards = new StringBuilder()
+        .append("Ad 9s 5d 3c 2s 4c Td").append(System.lineSeparator())
+        .toString();
+    String expected = new StringBuilder()
+        .append("Ad 9s 5d 3c 2s 4c Td").append(ONE_SPACE).append(HandRankCategoryEnum.STRAIGHT.getDescription()).append(ONE_SPACE).append(WINNER)
+        .toString();
+    assertEquals(expected, pokerHandService.calculateHandRank(cards));
+  }
+
+  @Test
+  public void testStraightFlushWithAceAsOne(){
+    String cards = new StringBuilder()
+        .append("As 9s 5s 3s 2s 4s Td").append(System.lineSeparator())
+        .toString();
+    String expected = new StringBuilder()
+        .append("As 9s 5s 3s 2s 4s Td").append(ONE_SPACE).append(HandRankCategoryEnum.STRAIGHT_FLUSH.getDescription()).append(ONE_SPACE).append(WINNER)
+        .toString();
+    assertEquals(expected, pokerHandService.calculateHandRank(cards));
+  }
+
 }
