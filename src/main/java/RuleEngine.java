@@ -17,9 +17,10 @@ public class RuleEngine {
   private static final char CLUB_SUIT = 'c';
   private static final char SPADE_SUIT = 's';
   private static final char ACE = 'A';
+  private static final char MAX_CARDS = 7;
 
   public HandRank hasFolded(Player selectedPlayer) {
-    if (selectedPlayer.getAllCardsSorted().size() < 7) {
+    if (selectedPlayer.getAllCardsSorted().size() < MAX_CARDS) {
       HandRank handRank = new HandRank();
       handRank.setHandRankCategory(HandRankCategoryEnum.FOLDED);
       return handRank;
@@ -29,7 +30,8 @@ public class RuleEngine {
 
   public HandRank hasRoyalFlush(Player selectedPlayer) {
     HandRank straightFlushHandRank = hasStraightFlush(selectedPlayer);
-    if (straightFlushHandRank != null && straightFlushHandRank.getAt().getFace() == ACE) {
+    if (straightFlushHandRank != null
+        && straightFlushHandRank.getAt().getFace() == ACE) {
       HandRank handRank = straightFlushHandRank;
       handRank.setHandRankCategory(HandRankCategoryEnum.ROYAL_FLUSH);
       return handRank;
@@ -70,7 +72,6 @@ public class RuleEngine {
         sequence = 1;
       }
     }
-
     return null;
   }
 

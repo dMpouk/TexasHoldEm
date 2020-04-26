@@ -20,15 +20,17 @@ public class HandRankService {
     handRank = (handRank == null) ? hasTheeOfAKind(selectedPlayer) : handRank;
     handRank = (handRank == null) ? hasTwoPair(selectedPlayer) : handRank;
     handRank = (handRank == null) ? hasOnePair(selectedPlayer) : handRank;
-
     if (handRank == null) {
       handRank = new HandRank();
       handRank.setHandRankCategory(HandRankCategoryEnum.HIGH_CARD);
       handRank.setAt(selectedPlayer.getAllCardsSorted().get(0));
       handRank.setKickers(selectedPlayer.getAllCardsSorted().subList(1, 6));
     }
-
     return handRank;
+  }
+
+  private HandRank hasFolded(Player selectedPlayer) {
+    return ruleEngine.hasFolded(selectedPlayer);
   }
 
   private HandRank hasRoyalFlush(Player selectedPlayer) {
@@ -43,32 +45,28 @@ public class HandRankService {
     return ruleEngine.hasFourOfAKind(selectedPlayer);
   }
 
-  private HandRank hasFlush(Player selectedPlayer) {
-    return ruleEngine.hasFlush(selectedPlayer);
+  private HandRank hasFullHouse(Player selectedPlayer) {
+    return ruleEngine.hasFullHouse(selectedPlayer);
   }
 
-  private HandRank hasFolded(Player selectedPlayer) {
-    return ruleEngine.hasFolded(selectedPlayer);
+  private HandRank hasFlush(Player selectedPlayer) {
+    return ruleEngine.hasFlush(selectedPlayer);
   }
 
   private HandRank hasStraight(Player selectedPlayer) {
     return ruleEngine.hasStraight(selectedPlayer);
   }
 
-  private HandRank hasOnePair(Player selectedPlayer, Character... excludedFace) {
-    return ruleEngine.hasOnePair(selectedPlayer, excludedFace);
+  private HandRank hasTheeOfAKind(Player selectedPlayer) {
+    return ruleEngine.hasTheeOfAKind(selectedPlayer);
   }
 
   private HandRank hasTwoPair(Player selectedPlayer) {
     return ruleEngine.hasTwoPair(selectedPlayer);
   }
 
-  private HandRank hasTheeOfAKind(Player selectedPlayer) {
-    return ruleEngine.hasTheeOfAKind(selectedPlayer);
-  }
-
-  private HandRank hasFullHouse(Player selectedPlayer) {
-    return ruleEngine.hasFullHouse(selectedPlayer);
+  private HandRank hasOnePair(Player selectedPlayer, Character... excludedFace) {
+    return ruleEngine.hasOnePair(selectedPlayer, excludedFace);
   }
 
 }
