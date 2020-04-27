@@ -22,20 +22,16 @@ public class RuleEngineService {
       Card selectedCard,
       Card secondCard,
       List<Card> cards) {
-    HandRank handRank = new HandRank();
-    handRank.setHandRankCategory(handRankCategory);
-    handRank.setAt(selectedCard);
-    handRank.setSecond(secondCard);
+    List<Card> kickers = new ArrayList<>();
     if (cards != null) {
-      List<Card> kickers =
+      kickers =
           cards.stream()
               .filter(c -> c.getFace() != selectedCard.getFace())
               .filter(c -> secondCard == null || c.getFace() != secondCard.getFace())
               .collect(Collectors.toList())
               .subList(handRankCategory.getMinKickerIndex(), handRankCategory.getMaxKickerIndex());
-      handRank.setKickers(kickers);
     }
-    return handRank;
+    return new HandRank(handRankCategory, selectedCard, secondCard, kickers);
   }
 
   private boolean canUseWildCard(List<Card> sortedCards) {

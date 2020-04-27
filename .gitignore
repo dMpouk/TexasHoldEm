@@ -116,7 +116,7 @@ fabric.properties
 hs_err_pid*
 
 **/target/*
-.target/
+target/
 .idea/
 *.iml
 

@@ -16,11 +16,8 @@ public class PokerHandService {
 
   public String analyze(String allCards) {
     List<Player> players = initializePlayers(allCards);
-
     decideHandRank(players);
-
     Player winner = decideWinner(players);
-
     return buildResult(players, winner);
   }
 
@@ -96,5 +93,4 @@ public class PokerHandService {
     }
     return result.toString();
   }
-
 }

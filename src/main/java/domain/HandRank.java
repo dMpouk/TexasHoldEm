@@ -1,7 +1,6 @@
 package domain;
 
 import enums.HandRankCategoryEnum;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -16,12 +15,18 @@ public class HandRank implements Comparable<HandRank>{
   public HandRank() {
   }
 
-  //TODO : make second optional with pattern
   public HandRank(HandRankCategoryEnum handRankCategory, Card at, Card second,
       List<Card> kickers) {
     this.handRankCategory = handRankCategory;
     this.at = at;
     this.second = second;
+    this.kickers = kickers;
+  }
+
+  public HandRank(HandRankCategoryEnum handRankCategory, Card at,
+      List<Card> kickers) {
+    this.handRankCategory = handRankCategory;
+    this.at = at;
     this.kickers = kickers;
   }
 

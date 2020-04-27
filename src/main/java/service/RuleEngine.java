@@ -45,9 +45,8 @@ public class RuleEngine implements RuleEngineApi {
       Card selectedCard = sortedCards.get(i);
       Card currentCard = selectedCard;
       for (int j = i + 1; j < sortedCards.size(); j++) {
-        if (((sortedCards.get(j).getFaceNumericRepresentation() + 1)
-                    == currentCard.getFaceNumericRepresentation())
-            && ((sortedCards.get(j).getSuit()) == currentCard.getSuit())) {
+        if (areSequential(sortedCards, currentCard, j)
+            && areTheSameSuit(sortedCards, currentCard, j)) {
           sequence++;
           currentCard = sortedCards.get(j);
         } else {
@@ -118,8 +117,7 @@ public class RuleEngine implements RuleEngineApi {
       Card selectedCard = sortedCards.get(i);
       Card currentCard = selectedCard;
       for (int j = i + 1; j < sortedCards.size(); j++) {
-        if (((sortedCards.get(j).getFaceNumericRepresentation() + 1)
-            == currentCard.getFaceNumericRepresentation())) {
+        if ((areSequential(sortedCards, currentCard, j))) {
           sequence++;
           currentCard = sortedCards.get(j);
         } else {
@@ -167,5 +165,14 @@ public class RuleEngine implements RuleEngineApi {
 
   public HandRank hasHighCard(Player selectedPlayer) {
     return ruleEngineService.createHandRank(HandRankCategoryEnum.HIGH_CARD, selectedPlayer.getAllCardsSorted().get(0), null, selectedPlayer.getAllCardsSorted());
+  }
+
+  private boolean areSequential(List<Card> sortedCards, Card currentCard, int j) {
+    return (sortedCards.get(j).getFaceNumericRepresentation() + 1)
+        == currentCard.getFaceNumericRepresentation();
+  }
+
+  private boolean areTheSameSuit(List<Card> sortedCards, Card currentCard, int j) {
+    return (sortedCards.get(j).getSuit()) == currentCard.getSuit();
   }
 }
