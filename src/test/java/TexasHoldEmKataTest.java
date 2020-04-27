@@ -54,7 +54,7 @@ public class TexasHoldEmKataTest {
   }
 
   @Test
-  public void calcuteHandRankForTwoPlayersAndDecideWinner(){
+  public void testHandRankForTwoPlayersAndDecideWinner(){
     String cards = new StringBuilder()
         .append("Kc 9s Ks Kd Td 3c 6d").append(System.lineSeparator())
         .append("9c Ah Ks Kd 9d 3c 6d").append(System.lineSeparator())
@@ -68,7 +68,7 @@ public class TexasHoldEmKataTest {
   }
 
   @Test
-  public void calcuteHandRankForTwoPlayersThatHaveTheSameRankAndDecideWinnerByKicker(){
+  public void testHandRankForTwoPlayersThatHaveTheSameRankAndDecideWinnerByKicker(){
     String cards = new StringBuilder()
         .append("Kc 9s Ts Jd 8d 3c 6d").append(System.lineSeparator())
         .append("9c Ah Ts Jd 8d 3c 6d").append(System.lineSeparator())
