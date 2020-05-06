@@ -53,9 +53,11 @@ public class RuleEngine implements RuleEngineApi {
           break;
         }
       }
-      sequence = ruleEngineService.increaseSequenceIfSuitedWildcard(sortedCards, sequence, currentCard);
+      sequence = ruleEngineService
+          .increaseSequenceIfSuitedWildcard(sortedCards, sequence, currentCard);
       if (sequence > 4) {
-        return ruleEngineService.createHandRank(HandRankCategoryEnum.STRAIGHT_FLUSH, selectedCard, null, null);
+        return ruleEngineService
+            .createHandRank(HandRankCategoryEnum.STRAIGHT_FLUSH, selectedCard, null, null);
       } else {
         sequence = 1;
       }
@@ -66,7 +68,9 @@ public class RuleEngine implements RuleEngineApi {
   public HandRank hasFourOfAKind(Player selectedPlayer) {
     List<Card> sortedCards = selectedPlayer.getAllCardsSorted();
     Card sameFacesResult = ruleEngineService.findSameFaces(4, sortedCards);
-    return (sameFacesResult != null) ? ruleEngineService.createHandRank(HandRankCategoryEnum.FOUR_OF_A_KIND, sameFacesResult, null, sortedCards) : null;
+    return (sameFacesResult != null) ? ruleEngineService
+        .createHandRank(HandRankCategoryEnum.FOUR_OF_A_KIND, sameFacesResult, null, sortedCards)
+        : null;
   }
 
   public HandRank hasFullHouse(Player selectedPlayer) {
@@ -77,7 +81,9 @@ public class RuleEngine implements RuleEngineApi {
             : null;
 
     if (threeOfAKindHandRank != null && onePairHandRank != null) {
-      return ruleEngineService.createHandRank(HandRankCategoryEnum.FULL_HOUSE, threeOfAKindHandRank.getAt(), onePairHandRank.getAt(), null);
+      return ruleEngineService
+          .createHandRank(HandRankCategoryEnum.FULL_HOUSE, threeOfAKindHandRank.getAt(),
+              onePairHandRank.getAt(), null);
     }
     return null;
   }
@@ -126,7 +132,8 @@ public class RuleEngine implements RuleEngineApi {
       }
       sequence = ruleEngineService.increaseSequenceIfWildcard(sortedCards, sequence);
       if (sequence > 4) {
-        return ruleEngineService.createHandRank(HandRankCategoryEnum.STRAIGHT, selectedCard, null, null);
+        return ruleEngineService
+            .createHandRank(HandRankCategoryEnum.STRAIGHT, selectedCard, null, null);
       } else {
         sequence = 1;
       }
@@ -137,7 +144,9 @@ public class RuleEngine implements RuleEngineApi {
   public HandRank hasThreeOfAKind(Player selectedPlayer) {
     List<Card> sortedCards = selectedPlayer.getAllCardsSorted();
     Card sameFacesResult = ruleEngineService.findSameFaces(3, sortedCards);
-    return (sameFacesResult != null) ? ruleEngineService.createHandRank(HandRankCategoryEnum.THREE_OF_A_KIND, sameFacesResult, null, sortedCards) : null;
+    return (sameFacesResult != null) ? ruleEngineService
+        .createHandRank(HandRankCategoryEnum.THREE_OF_A_KIND, sameFacesResult, null, sortedCards)
+        : null;
   }
 
   public HandRank hasTwoPair(Player selectedPlayer) {
@@ -146,7 +155,8 @@ public class RuleEngine implements RuleEngineApi {
     List<Card> pairs = ruleEngineService.searchForPairs(sortedCards);
     if (pairs.size() > 1) {
       pairs.sort(Card::compareTo);
-      return ruleEngineService.createHandRank(HandRankCategoryEnum.TWO_PAIR, pairs.get(0), pairs.get(1), sortedCards);
+      return ruleEngineService
+          .createHandRank(HandRankCategoryEnum.TWO_PAIR, pairs.get(0), pairs.get(1), sortedCards);
     }
     return null;
   }
@@ -158,13 +168,16 @@ public class RuleEngine implements RuleEngineApi {
 
     List<Card> sortedPairs = ruleEngineService.searchForPairs(filteredCards);
     if (!sortedPairs.isEmpty()) {
-      return ruleEngineService.createHandRank(HandRankCategoryEnum.ONE_PAIR, sortedPairs.get(0), null, filteredCards);
+      return ruleEngineService
+          .createHandRank(HandRankCategoryEnum.ONE_PAIR, sortedPairs.get(0), null, filteredCards);
     }
     return null;
   }
 
   public HandRank hasHighCard(Player selectedPlayer) {
-    return ruleEngineService.createHandRank(HandRankCategoryEnum.HIGH_CARD, selectedPlayer.getAllCardsSorted().get(0), null, selectedPlayer.getAllCardsSorted());
+    return ruleEngineService
+        .createHandRank(HandRankCategoryEnum.HIGH_CARD, selectedPlayer.getAllCardsSorted().get(0),
+            null, selectedPlayer.getAllCardsSorted());
   }
 
   private boolean areSequential(List<Card> sortedCards, Card currentCard, int j) {

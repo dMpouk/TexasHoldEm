@@ -14,7 +14,7 @@ public class Card implements Comparable<Card> {
     return face;
   }
 
-  public int getFaceNumericRepresentation(){
+  public int getFaceNumericRepresentation() {
     return replaceLetterFaces(this.face);
   }
 
@@ -24,24 +24,31 @@ public class Card implements Comparable<Card> {
 
   @Override
   public int compareTo(Card other) {
-      int thisFace = replaceLetterFaces(this.face);
-      int otherFace = replaceLetterFaces(other.face);
+    int thisFace = replaceLetterFaces(this.face);
+    int otherFace = replaceLetterFaces(other.face);
 
-      if(thisFace > otherFace){
-        return 1;
-      }else if(thisFace < otherFace){
-        return -1;
-      }
-      return 0;
+    if (thisFace > otherFace) {
+      return 1;
+    } else if (thisFace < otherFace) {
+      return -1;
+    }
+    return 0;
   }
 
   private int replaceLetterFaces(char face) {
-    String faceString = String.valueOf(face);
-    String filteredString = faceString.replace("A", "14")
-        .replace("K", "13")
-        .replace("Q", "12")
-        .replace("J", "11")
-        .replace("T", "10");
-    return Integer.parseInt(filteredString);
+    switch (face) {
+      case 'A':
+        return 14;
+      case 'K':
+        return 13;
+      case 'Q':
+        return 12;
+      case 'J':
+        return 11;
+      case 'T':
+        return 10;
+      default:
+        return Integer.parseInt(String.valueOf(face));
+    }
   }
 }

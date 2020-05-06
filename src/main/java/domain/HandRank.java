@@ -4,7 +4,7 @@ import enums.HandRankCategoryEnum;
 import java.util.Comparator;
 import java.util.List;
 
-public class HandRank implements Comparable<HandRank>{
+public class HandRank implements Comparable<HandRank> {
 
   private HandRankCategoryEnum handRankCategory;
   private Card at;
@@ -73,14 +73,14 @@ public class HandRank implements Comparable<HandRank>{
 
   private Comparator<HandRank> kickersComparator() {
     return (o1, o2) -> {
-       int result = 0;
-       for(int i=0; i<o1.getKickers().size(); i++){
-           result =  o1.getKickers().get(i).compareTo(o2.getKickers().get(i));
-           if(result != 0){
-             return result;
-           }
-       }
-       return result;
+      int result = 0;
+      for (int i = 0; i < o1.getKickers().size(); i++) {
+        result = o1.getKickers().get(i).compareTo(o2.getKickers().get(i));
+        if (result != 0) {
+          return result;
+        }
+      }
+      return result;
     };
   }
 }

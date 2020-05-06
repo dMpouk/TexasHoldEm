@@ -80,7 +80,7 @@ public class RuleEngineService {
     return sortedCards.stream().anyMatch(c -> c.getFace() == ACE);
   }
 
-  public Card findSameFaces(int numberOfSameFaces, List<Card> cards){
+  public Card findSameFaces(int numberOfSameFaces, List<Card> cards) {
     int sameFaces = 1;
     for (int i = 0; i < cards.size(); i++) {
       Card selectedCard = cards.get(i);
